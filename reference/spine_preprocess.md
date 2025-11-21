@@ -1,0 +1,45 @@
+# Preprocess data for spine chart
+
+Returns a data frame with the latest time period of data for each
+indicator name.
+
+## Usage
+
+``` r
+spine_preprocess(data, indicator, timeperiod_sortable)
+```
+
+## Arguments
+
+- data:
+
+  a data frame to create the spine chart from. The data frame should
+  contain records for all area types included in the chart (eg, if
+  plotting for County & UA with a comparator of region and a median line
+  for national, the data frame should contain records for all of these
+  data). The minimum field requirements in the data frame are; value,
+  count, area_code, indicator, timeperiod, polarity, significance,
+  area_type. See below for the definitions of these fields
+
+- indicator:
+
+  unquoted field name for indicators. This should be what is presented
+  as the label for the final spine chart, hence should be unique for
+  each vertabra. Be careful the indicator doesn't have sub-categories
+  based on other fields, such as sex (male, female, persons) or age
+  group
+
+- timeperiod_sortable:
+
+  unquoted field name containing the time period that is numeric and
+  sortable, such that higher values are a later time period
+
+## Value
+
+A processed data frame for latest time periods of given indicators
+
+## Details
+
+This processing only takes place on the indicator field and the time
+period field provided. If the data contains multiple sexes or age groups
+for an indicator, make sure the indicator field reflects this.

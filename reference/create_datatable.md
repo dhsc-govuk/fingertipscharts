@@ -1,0 +1,109 @@
+# Data table supporting information
+
+Returns a data frame containing the data that sits next to the spine
+chart
+
+## Usage
+
+``` r
+create_datatable(
+  data,
+  indicator,
+  area_code,
+  timeperiod,
+  trend,
+  count,
+  value,
+  local_area_code,
+  median_line_area_code,
+  comparator_area_code,
+  dps = 1,
+  header_width,
+  horizontal_arrow_multiplier
+)
+```
+
+## Arguments
+
+- data:
+
+  a data frame to create the spine chart from. The data frame should
+  contain records for all area types included in the chart (eg, if
+  plotting for County & UA with a comparator of region and a median line
+  for national, the data frame should contain records for all of these
+  data). The minimum field requirements in the data frame are; value,
+  count, area_code, indicator, timeperiod, polarity, significance,
+  area_type. See below for the definitions of these fields
+
+- indicator:
+
+  unquoted field name for the field of the field containing the
+  indicator labels. Take care as errors will occur where indicator
+  labels are the same but data exist for multiple sub-categories (for
+  example, sex or age)
+
+- area_code:
+
+  unquoted field name for the field where area codes are stored
+  (local_area_code, median_line_area_code and comparator_area_code, if
+  using, should all exist in this field)
+
+- timeperiod:
+
+  unquoted field name for the field of the time period field. This gets
+  used in the accompanying data table
+
+- trend:
+
+  unquoted field name for the field of the trend field; if the user
+  doesn't want to display trend information then leave this incomplete
+  and amend the header_labels argument by replacing the "Trend" header
+  with "". Text within this field should contain one of the following
+  words to control the arrows that are displayed; "decreasing",
+  "increasing", "no significant change", "could not be calculated". The
+  text within this field should contain one of the following words to
+  control the colour; "better", "worse", "no significant change". If
+  none of these words appear in the string, the words "increasing" or
+  "decreasing" will be used to colour the arrows in different shades of
+  blue
+
+- count:
+
+  unquoted field name for the field where the count (numerator) is
+  stored. This is provided to the accompanying data table
+
+- value:
+
+  unquoted field name for the field containing the values to be plotted
+
+- local_area_code:
+
+  string; the code of the area whose data is being presented
+
+- median_line_area_code:
+
+  string; area code for the median line. Defaults to "E92000001"
+  (England)
+
+- comparator_area_code:
+
+  string; area code for the comparator point. Defaults to NA
+
+- dps:
+
+  number of decimal places to use in the data table
+
+- header_width:
+
+  x dimension of chart to be used for normalising the arrow length when
+  horizonal
+
+- horizontal_arrow_multiplier:
+
+  number to scale horizontal trend arrows. A value below 1 will shorten
+  the arrows
+
+## Value
+
+A data frame containing the information that sits alongside the spine
+chart
